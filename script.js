@@ -10,3 +10,20 @@ function init() {
     console.log("Starting arithmetic calculations with " + znamky);
     return znamky;
 }
+
+function calculateMean() {
+    console.log("Calculating arithmetic mean...");
+    let aritmetickyPrumer = znamky.reduce((a, b) => a + b, 0) / znamky.length;
+    if (aritmetickyPrumer.toString().length > 4) {
+        aritmetickyPrumer = Number(aritmetickyPrumer.toFixed(2));
+    }
+    setTimeout(() => {
+        console.log("Arithmetic mean: " + aritmetickyPrumer);
+    }, 1000); // #pro efekt
+    return aritmetickyPrumer;
+}
+
+let znamky = init();
+calculateMean(znamky);
+
+
