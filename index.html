@@ -7,6 +7,32 @@
 </head>
 <body>
     <h1>Hello World</h1>
+    <script>
+        // Store the original console.log
+        const originalConsoleLog = console.log;
+
+        // Create a container to show logs
+        const logContainer = document.createElement('div');
+        logContainer.style.border = '1px solid #ccc';
+        logContainer.style.padding = '10px';
+        logContainer.style.margin = '10px 0';
+        logContainer.style.background = '#f9f9f9';
+        logContainer.id = 'console-log-interceptor';
+        logContainer.innerHTML = '<strong>Console Log Output:</strong><br>';
+        document.body.insertBefore(logContainer, document.body.firstChild.nextSibling);
+
+        // Override console.log
+        console.log = function(...args) {
+            // Print to page
+            const msg = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : String(arg)).join(' ');
+            const entry = document.createElement('div');
+            entry.textContent = msg;
+            logContainer.appendChild(entry);
+
+            // Forward to the real console
+            originalConsoleLog.apply(console, args);
+        };
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
